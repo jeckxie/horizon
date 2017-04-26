@@ -1,5 +1,5 @@
 {% load branding %}
-
+{% load themes %}
 <a class="navbar-brand" href="{% site_branding_link %}" target="_self">
-  {% include "material/openstack-one-color.svg" %}
+  <img class="openstack-logo" src="{% themable_asset 'img/logo-white.png' %}" alt="{% site_branding %}">
 </a>
