@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb_nav %}
+{% endblock %}
+{% block page_header %}
+{% endblock %}
+
+{% block main %}
+<form id="statistics_form" action="{{ statistics_url }}/login" method="post" target="statistics_iframe" style="display: none">
+  <input name="user" id="user" value="{{ username }}">
+  <input name="password" id="password" value="{{ password }}">
+  <input name="email" id="email" value="">
+  <button>submit</button>
+</form>
+<iframe id="statistics_iframe" name="statistics_iframe" width="0" onload="this.height=document.body.clientHeight-50">
+</iframe>
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script>
+document.getElementById('statistics_form').submit();
+setTimeout(function(){
+	document.getElementById('statistics_iframe').src = '{{ statistics_url }}';
+	document.getElementById('statistics_iframe').width = '100%';
+}, 1000);
+</script>
+{% endblock %}
+

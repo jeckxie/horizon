@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb_nav %}
+{% endblock %}
+{% block page_header %}
+{% endblock %}
+
+{% block main %}
+<form id="vmmonitor_form" action="{{ vmmonitor_url }}" method="post" target="vmmonitor_iframe" style="display: none">
+  <input id="sid" name="sid" value="LoginFromHorizon">
+  <input id="form_refresh" name="form_refresh" value="1">
+  <input name="name" id="name" value="{{ username }}">
+  <input name="password" id="password" value="{{ password }}">
+  <input id="autologin" name="autologin" value="1" checked="checked">
+  <input id="enter" name="enter" value="Sign in" >
+  <button>submit</button>
+</form>
+<iframe id="vmmonitor_iframe" name="vmmonitor_iframe" width="100%" onload="this.height=document.body.clientHeight-50">
+</iframe>
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script>
+document.getElementById('vmmonitor_form').submit();
+</script>
+{% endblock %}
+

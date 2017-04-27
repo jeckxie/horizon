@@ -842,3 +842,14 @@ ALLOWED_PRIVATE_SUBNET_CIDR = {'ipv4': [], 'ipv6': []}
 #USER_TABLE_EXTRA_INFO = {
 #   'phone_num': _('Phone Number'),
 #}
+
+# for zabbix
+VMMONITOR_URL = "http://100.2.30.80:7777"
+VMMONITOR_USERNAME = "admin"
+VMMONITOR_PASSWORD = "zabbix"
+
+# for grafana
+STATISTICS_URL = "http://100.2.30.80:3000"
+STATISTICS_USERNAME = "admin"
+STATISTICS_PASSWORD = "ruqpmOcytKPBgefxBIXCszI157rwFzDfZCXrWCGh"
+
