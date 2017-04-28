@@ -83,8 +83,19 @@ class LiveMigrateInstance(policy.PolicyTargetMixin,
     action_type = "danger"
 
     def allowed(self, request, instance):
+        if instance is None:
+            return True
         return ((instance.status in project_tables.ACTIVE_STATES)
                 and not project_tables.is_deleting(instance))
+
+    def get_link_url(self, datum=None):
+        instance_id = datum.id if datum else 'MULTIPLE'
+        return urlresolvers.reverse(self.url, args=(instance_id,))
+
+    def get_default_attrs(self):
+        attrs = super(LiveMigrateInstance, self).get_default_attrs()
+        attrs.update({'data-batch-action': 'true'})
+        return attrs
 
 
 class AdminUpdateRow(project_tables.UpdateRow):
@@ -173,6 +184,7 @@ class AdminInstancesTable(tables.DataTable):
         verbose_name = _("Instances")
         status_columns = ["status", "task"]
         table_actions = (project_tables.DeleteInstance,
+                         LiveMigrateInstance,
                          AdminInstanceFilterAction)
         row_class = AdminUpdateRow
         row_actions = (project_tables.ConfirmResize,

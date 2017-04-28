@@ -200,6 +200,8 @@ class LiveMigrateView(forms.ModalFormView):
     @memoized.memoized_method
     def get_object(self, *args, **kwargs):
         instance_id = self.kwargs['instance_id']
+        if instance_id == 'MULTIPLE':
+            return object()
         try:
             return api.nova.server_get(self.request, instance_id)
         except Exception:

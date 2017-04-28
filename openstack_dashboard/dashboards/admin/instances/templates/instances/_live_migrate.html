@@ -16,4 +16,16 @@
     <h3>{% trans "Description:" %}</h3>
     <p>{% trans "Live migrate an instance to a specific host." %}</p>
 </div>
+
+<script>
+var selected_instances = '';
+$('#instances .table-row-multi-select:not(.multi-select-header)').each(function(index, ele){
+  if($(ele).is(':checked')){
+    if(selected_instances) selected_instances += ',';
+    selected_instances += ($(ele).val());
+  }
+});
+$('#id_multi_instances').val(selected_instances);
+</script>
+
 {% endblock %}
